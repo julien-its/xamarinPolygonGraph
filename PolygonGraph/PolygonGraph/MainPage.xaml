@@ -2,13 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:PolygonGraph"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="PolygonGraph.MainPage">
 
     <StackLayout>
         <!-- Place new controls here -->
-    	<Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        
+
+        <skia:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        </skia:SKCanvasView>
+
+        <skia:SKCanvasView PaintSurface="OnCanvasViewPaintSurface2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        </skia:SKCanvasView>
+
+        <skia:SKCanvasView PaintSurface="OnCanvasViewPaintSurface3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        </skia:SKCanvasView>
     </StackLayout>
 
 </ContentPage>
