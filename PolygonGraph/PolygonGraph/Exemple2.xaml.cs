@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 
 namespace PolygonGraph
 {
-	public partial class MainPage : ContentPage
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class Exemple2 : ContentPage
 	{
         protected Models.Services.PolygonGraph graph;
 
@@ -17,29 +21,36 @@ namespace PolygonGraph
         private List<string> _categories;
         private List<Slider> _sliders;
 
-        public MainPage()
+        public Exemple2 ()
 		{
-			InitializeComponent();
+			InitializeComponent ();
 
-            _data = new List<double> { 80, 100, 90, 80, 70, 95 };
-            _categories = new List<string> { "cat 1", "cat 2", "cat 3", "cat 4", "cat 5", "cat 6", };
+            _data = new List<double> { 80, 100, 90, 80 };
+            _categories = new List<string> { "cat 1", "cat 2", "cat 3", "cat 4" };
             _sliders = new List<Slider>();
 
-            graph = new Models.Services.PolygonGraph(new Models.Services.PolygonGraphOptions());
+            graph = new Models.Services.PolygonGraph(new Models.Services.PolygonGraphOptions
+            {
+                AngleStart = Models.Services.PolygonGraphOptions.ANGLE_DEFAULT,
+                CornerRadius = 4,
+                CountGraduations = 4,
+                CountVertices = 4
+            });
             graph.setCategories(_categories).setData(_data);
 
-            for(int index=0; index<_data.Count(); index++)
+
+            for (int index = 0; index < _data.Count(); index++)
             {
                 Slider slider = new Slider(0, 100, _data[index]);
                 slider.Margin = 0;
-                
+
                 slider.ValueChanged += OnSliderValueChanged;
 
                 _sliders.Add(slider);
                 MainLayout.Children.Add(slider);
             }
         }
-        
+
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             graph.DrawCanvas(args);

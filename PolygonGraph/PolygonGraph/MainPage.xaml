@@ -5,18 +5,11 @@
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="PolygonGraph.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
+    <StackLayout x:Name="MainLayout" Spacing="0" Padding="0" Margin="0">
+
+        <skia:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" x:Name="GraphCanvasView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        </skia:SKCanvasView>
         
-
-        <skia:SKCanvasView PaintSurface="OnCanvasViewPaintSurface" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        </skia:SKCanvasView>
-
-        <skia:SKCanvasView PaintSurface="OnCanvasViewPaintSurface2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        </skia:SKCanvasView>
-
-        <skia:SKCanvasView PaintSurface="OnCanvasViewPaintSurface3" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        </skia:SKCanvasView>
     </StackLayout>
 
 </ContentPage>

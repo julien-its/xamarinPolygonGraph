@@ -12,6 +12,8 @@ namespace PolygonGraph
 			InitializeComponent();
 
 			MainPage = new MainPage();
+			//MainPage = new Exemple2();
+			//MainPage = new Exemple3();
 		}
 
 		protected override void OnStart ()

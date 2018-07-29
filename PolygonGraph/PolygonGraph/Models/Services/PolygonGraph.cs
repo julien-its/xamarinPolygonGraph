@@ -69,12 +69,18 @@ namespace PolygonGraph.Models.Services
         private SKImageInfo info;
 
         private List<string> categories;
-        private List<float> data;
+        private List<double> data;
 
-        public PolygonGraph(SKPaintSurfaceEventArgs args, PolygonGraphOptions options)
+
+        public PolygonGraph(PolygonGraphOptions options)
         {
             this.options = options;
 
+            
+        }
+
+        public PolygonGraph DrawCanvas(SKPaintSurfaceEventArgs args)
+        {
             this.info = args.Info;
             this.surface = args.Surface;
             this.canvas = surface.Canvas;
@@ -84,6 +90,8 @@ namespace PolygonGraph.Models.Services
 
             drawPolygons();
             drawAxes();
+
+            return this;
         }
 
         public PolygonGraph setCategories(List<string> categories)
@@ -92,7 +100,7 @@ namespace PolygonGraph.Models.Services
             return this;
         }
 
-        public PolygonGraph setData(List<float> data)
+        public PolygonGraph setData(List<double> data)
         {
             this.data = data;
             return this;
@@ -141,14 +149,14 @@ namespace PolygonGraph.Models.Services
             return den * Math.Min(info.Width, info.Height);
         }
 
-        private float getRadiusByValue(float value)
+        private float getRadiusByValue(double value)
         {
             float denMax = 0.45f;
             float denMin = 0f;
             float denDiff = denMax - denMin;
 
             float dataDiff = options.ScaleTo - options.ScaleFrom;
-            float dataPercent = value / dataDiff * 100;
+            float dataPercent = (float)value / dataDiff * 100;
             float den = denMin + denDiff * dataPercent / 100;
 
             return den * Math.Min(info.Width, info.Height);
@@ -287,6 +295,12 @@ namespace PolygonGraph.Models.Services
                     canvas.DrawPath(path, paint);
                 }
             }
+        }
+
+        public void refreshData()
+        {
+            
+            drawData();
         }
     }
 }
